@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Claude Skill 建置完整指南（繁中完整翻譯）</title>
-  <meta name="description" content="The Complete Guide to Building Skills for Claude 的繁體中文完整翻譯網站版（33頁完整覆蓋）。" />
+  <meta name="description" content="Claude 技能建置完整指南 的繁體中文完整翻譯網站版（33頁完整覆蓋）。" />
   <meta property="og:title" content="Claude Skill 建置完整指南（繁中完整翻譯）" />
   <meta property="og:description" content="依原始 PDF 章節順序整理之完整繁中翻譯，含目錄錨點與可摺疊章節。" />
   <meta property="og:type" content="website" />
@@ -87,7 +87,7 @@
   </aside>
 
   <header class="hero" id="cover">
-    <h1>The Complete Guide to Building Skills for Claude</h1>
+    <h1>Claude 技能建置完整指南</h1>
   </header>
 
   <main class="container">
@@ -134,8 +134,8 @@
 
     <section class="section" id="ch1">
       <div class="kicker">第 1 章</div>
-      <h2>Fundamentals（基礎）</h2>
-      <h3>什麼是 Skill？</h3>
+      <h2>基礎</h2>
+      <h3>什麼是技能？</h3>
       <p>Skill 是一個資料夾，包含：</p>
       <ul>
         <li><code>SKILL.md</code>（必要）：Markdown 指令檔，含 YAML frontmatter。</li>
@@ -144,20 +144,20 @@
         <li><code>assets/</code>（可選）：輸出使用的模板、字體、圖示等。</li>
       </ul>
       <h3>核心設計原則</h3>
-      <h4>1) Progressive Disclosure（漸進揭露）</h4>
+      <h4>1) 漸進揭露（Progressive Disclosure）</h4>
       <ul>
         <li>第一層（YAML frontmatter）：永遠載入於 Claude system prompt；只放「判斷何時用此 Skill」的必要資訊。</li>
         <li>第二層（SKILL.md 本文）：Claude 判斷相關時才載入，含完整操作指引。</li>
         <li>第三層（連結檔案）：Skill 內其他檔案，僅在需要時再探索。</li>
       </ul>
       <p>這種三層結構能在保留專業能力下，最小化 token 消耗。</p>
-      <h4>2) Composability（可組合性）</h4>
+      <h4>2) 可組合性（Composability）</h4>
       <p>Claude 可同時載入多個 Skill。你的 Skill 應能與其他 Skill 並行，而不是假設自己是唯一能力來源。</p>
-      <h4>3) Portability（可攜性）</h4>
+      <h4>3) 可攜性（Portability）</h4>
       <p>Skill 在 Claude.ai、Claude Code、API 上應一致運作（前提是環境具備必要依賴）。</p>
 
       <details open>
-        <summary>給 MCP 建置者：Skills + Connectors</summary>
+        <summary>給 MCP 建置者：技能 + 連接器</summary>
         <p>若你已有可運作 MCP server，最難的連通層已完成。Skill 是其上的知識層：把你已知的流程與最佳實務打包，讓 Claude 穩定執行。</p>
         <p><strong>廚房比喻</strong>：MCP 是專業廚房（工具、食材、設備）；Skill 是食譜（可產生價值的步驟）。</p>
         <div class="card">
@@ -174,8 +174,8 @@
 
     <section class="section" id="ch2">
       <div class="kicker">第 2 章</div>
-      <h2>Planning and design（規劃與設計）</h2>
-      <h3>先從 use case 開始</h3>
+      <h2>規劃與設計</h2>
+      <h3>先從使用情境（use case）開始</h3>
       <p>在寫任何程式前，先定義 2–3 個具體 use case。</p>
       <div class="card">
         <p><strong>範例：Project Sprint Planning</strong></p>
@@ -200,15 +200,15 @@
         <li>要嵌入哪些領域知識或最佳實務？</li>
       </ul>
 
-      <h3>常見三類 use case</h3>
-      <h4>Category 1：文件與資產建立</h4>
+      <h3>常見三類使用情境</h3>
+      <h4>類型 1：文件與資產建立</h4>
       <p>用於穩定產出高品質文件、簡報、App、設計、程式碼等。關鍵技巧：內嵌風格規範、模板、交付前品質清單；通常可只用 Claude 內建能力。</p>
-      <h4>Category 2：Workflow 自動化</h4>
+      <h4>類型 2：工作流程自動化</h4>
       <p>用於多步流程與跨 MCP 協作。關鍵技巧：步驟式流程＋驗證關卡、共用模板、迭代改善迴圈。</p>
-      <h4>Category 3：MCP 增強</h4>
+      <h4>類型 3：MCP 增強</h4>
       <p>用於補足 MCP 只有工具存取、缺少操作知識的落差。關鍵技巧：多次 MCP 連續呼叫、領域專業封裝、常見錯誤處理。</p>
 
-      <h3>定義成功標準（Success Criteria）</h3>
+      <h3>定義成功標準</h3>
       <p class="muted">以下是建議目標與粗略 benchmark，不是絕對門檻；評估仍會含部分主觀判斷。</p>
       <h4>量化指標</h4>
       <ul>
@@ -237,7 +237,7 @@
         <li>Skill 資料夾內不放 <code>README.md</code>（說明放 SKILL.md 或 references/）。</li>
       </ul>
 
-      <h3>YAML frontmatter（最重要）</h3>
+      <h3>YAML 前言區塊</h3>
       <p>Claude 是否載入 Skill，主要看 frontmatter。</p>
       <pre><code>---
 name: your-skill-name
@@ -257,10 +257,10 @@ description: What it does. Use when user asks to [specific phrases].
         <li>Skill 名稱禁止含 claude / anthropic（保留字）。</li>
       </ul>
 
-      <h3>如何寫出有效 Skill</h3>
-      <h4>Description 寫法</h4>
+      <h3>如何寫出有效技能</h3>
+      <h4>描述寫法</h4>
       <p>建議結構：<strong>[做什麼] + [何時用] + [關鍵能力]</strong>。避免過度抽象、只談技術細節而沒有使用者觸發語。</p>
-      <h4>主指令區寫法（SKILL.md body）</h4>
+      <h4>主指令區寫法（SKILL.md 內文）</h4>
       <ul>
         <li>先寫步驟（Step 1、Step 2…），每步要有可執行動作與預期輸出。</li>
         <li>補常見情境範例（User says / Actions / Result）。</li>
@@ -277,7 +277,7 @@ description: What it does. Use when user asks to [specific phrases].
 
     <section class="section" id="ch3">
       <div class="kicker">第 3 章</div>
-      <h2>Testing and iteration（測試與迭代）</h2>
+      <h2>測試與迭代</h2>
       <p>Skill 可依需求採不同嚴謹度測試：</p>
       <ul>
         <li>Claude.ai 手動測試：最快、免 setup。</li>
@@ -289,23 +289,23 @@ description: What it does. Use when user asks to [specific phrases].
       <div class="callout"><strong>Pro Tip：</strong>先針對一個高難度任務反覆迭代到成功，再把成功策略抽成 Skill；訊號會比一開始做大量廣泛測試更快更準。</div>
 
       <h3>建議測試面向</h3>
-      <h4>1) Triggering tests（觸發）</h4>
+      <h4>1) 觸發測試</h4>
       <ul>
         <li>應在明確任務觸發。</li>
         <li>同義改寫任務也應觸發。</li>
         <li>不相關主題不應觸發。</li>
       </ul>
-      <h4>2) Functional tests（功能正確）</h4>
+      <h4>2) 功能測試</h4>
       <ul>
         <li>輸出正確。</li>
         <li>API 成功。</li>
         <li>錯誤處理可運作。</li>
         <li>邊界情境有覆蓋。</li>
       </ul>
-      <h4>3) Performance comparison（與 baseline 比較）</h4>
+      <h4>3) 效能比較（與基準版）</h4>
       <p>比較有無 Skill：對話往返數、API 失敗數、token 消耗。理想是更少往返、更少錯誤、更低 token。</p>
 
-      <h3>善用 skill-creator</h3>
+      <h3>善用技能建立器（skill-creator）</h3>
       <ul>
         <li>可由自然語言描述產生 SKILL.md 與 frontmatter。</li>
         <li>可檢查常見問題（描述模糊、觸發詞不足、結構不良）。</li>
@@ -323,7 +323,7 @@ description: What it does. Use when user asks to [specific phrases].
 
     <section class="section" id="ch4">
       <div class="kicker">第 4 章</div>
-      <h2>Distribution and sharing（發佈與分享）</h2>
+      <h2>發佈與分享</h2>
       <p>Skill 能讓 MCP 整合更完整。當使用者比較 connector 時，有 Skill 的方案通常更快產生價值，會比只有 MCP 的方案更有競爭力。</p>
 
       <h3>目前發佈模型（2026/01）</h3>
@@ -343,7 +343,7 @@ description: What it does. Use when user asks to [specific phrases].
       <h3>開放標準</h3>
       <p>Agent Skills 已公開為開放標準；與 MCP 一樣，目標是可跨工具／平台攜帶。相同 Skill 應可在 Claude 與其他 AI 平台運作（若有平台差異，可在 <code>compatibility</code> 註明）。</p>
 
-      <h3>透過 API 使用 Skill</h3>
+      <h3>透過 API 使用技能</h3>
       <ul>
         <li><code>/v1/skills</code>：列出與管理 Skill。</li>
         <li>Messages API 用 <code>container.skills</code> 帶入 Skill。</li>
@@ -370,34 +370,34 @@ description: What it does. Use when user asks to [specific phrases].
 
     <section class="section" id="ch5">
       <div class="kicker">第 5 章</div>
-      <h2>Patterns and troubleshooting（模式與疑難排解）</h2>
+      <h2>模式與疑難排解</h2>
       <p>以下模式來自早期採用者與內部團隊，屬於「常見有效做法」，不是強制模板。</p>
 
-      <h3>先選框架：Problem-first vs Tool-first</h3>
+      <h3>先選框架：問題導向 vs 工具導向</h3>
       <ul>
         <li><strong>Problem-first</strong>：使用者描述目標結果；Skill 自動編排 MCP 呼叫序列。</li>
         <li><strong>Tool-first</strong>：使用者先有工具連線；Skill 補上最佳實務與操作知識。</li>
       </ul>
       <p>多數 Skill 會偏其中一邊。先選對框架，才能用對模式。</p>
 
-      <h3>Pattern 1：Sequential workflow orchestration</h3>
+      <h3>模式 1：序列式流程編排</h3>
       <p>適用：必須照順序的多步流程。關鍵：明確步驟依賴、每步驗證、失敗回滾指示。</p>
 
-      <h3>Pattern 2：Multi-MCP coordination</h3>
+      <h3>模式 2：多 MCP 協調</h3>
       <p>適用：流程跨多個服務。關鍵：階段切分、資料在 MCP 間傳遞、階段交接前驗證、集中錯誤處理。</p>
 
-      <h3>Pattern 3：Iterative refinement</h3>
+      <h3>模式 3：迭代精修</h3>
       <p>適用：品質需多輪打磨（如報告生成）。關鍵：品質準則明確、檢查腳本、修正迴圈、知道何時停止。</p>
 
-      <h3>Pattern 4：Context-aware tool selection</h3>
+      <h3>模式 4：情境感知工具選擇</h3>
       <p>適用：同一目標在不同上下文要選不同工具。關鍵：決策樹清楚、備援方案、向使用者說明選擇理由。</p>
 
-      <h3>Pattern 5：Domain-specific intelligence</h3>
+      <h3>模式 5：領域專屬智能</h3>
       <p>適用：除了工具存取，還要加上領域規則（如合規）。關鍵：先規則審核再執行、完整審計記錄、治理清楚。</p>
 
       <h3>疑難排解</h3>
       <details>
-        <summary>Skill 無法上傳</summary>
+        <summary>技能無法上傳</summary>
         <ul>
           <li>找不到 SKILL.md：檔名不正確（必須大小寫精準為 <code>SKILL.md</code>）。</li>
           <li>Invalid frontmatter：YAML 分隔符缺失、引號未關閉等格式錯誤。</li>
@@ -405,7 +405,7 @@ description: What it does. Use when user asks to [specific phrases].
         </ul>
       </details>
       <details>
-        <summary>Skill 不觸發或觸發過頭</summary>
+        <summary>技能不觸發或觸發過頭</summary>
         <ul>
           <li>不觸發：description 太泛，缺使用者會說的 trigger phrases。</li>
           <li>觸發過頭：加負面觸發、限縮適用範圍、明確領域邊界。</li>
@@ -421,7 +421,7 @@ description: What it does. Use when user asks to [specific phrases].
         </ul>
       </details>
       <details>
-        <summary>Skill 載入了但指令沒遵守</summary>
+        <summary>技能已載入但指令未遵守</summary>
         <ul>
           <li>指令過長：改精簡、條列化、重要資訊置頂。</li>
           <li>語意模糊：把「要驗證」改成明確驗證清單。</li>
@@ -439,7 +439,7 @@ description: What it does. Use when user asks to [specific phrases].
 
     <section class="section" id="ch6">
       <div class="kicker">第 6 章</div>
-      <h2>Resources and references（資源與參考）</h2>
+      <h2>資源與參考</h2>
       <p>若你是第一次建立 Skill，建議先看 Best Practices Guide，再依需求查 API 文件。</p>
       <h3>官方文件</h3>
       <ul>
@@ -471,7 +471,7 @@ description: What it does. Use when user asks to [specific phrases].
 
     <section class="section" id="ref-a">
       <div class="kicker">參考 A</div>
-      <h2>快速檢查清單（Quick checklist）</h2>
+      <h2>快速檢查清單</h2>
       <h3>開始前</h3>
       <ul>
         <li>已定義 2–3 個具體 use case。</li>
@@ -508,7 +508,7 @@ description: What it does. Use when user asks to [specific phrases].
 
     <section class="section" id="ref-b">
       <div class="kicker">參考 B</div>
-      <h2>YAML frontmatter 參考</h2>
+      <h2>YAML 前言區塊參考</h2>
       <h3>必要欄位</h3>
       <pre><code>---
 name: skill-name-in-kebab-case
@@ -537,7 +537,7 @@ metadata:
 
     <section class="section" id="ref-c">
       <div class="kicker">參考 C</div>
-      <h2>完整 Skill 範例來源</h2>
+      <h2>完整技能範例來源</h2>
       <ul>
         <li>Document Skills：PDF、DOCX、PPTX、XLSX 生成範例。</li>
         <li>Example Skills：多種 workflow 模式範例。</li>
@@ -552,7 +552,7 @@ metadata:
       <div class="callout">
         本文為翻譯改編，依原始 PDF 章節順序製作為繁體中文網站版，供學習與參考使用。
       </div>
-      <p>原文：<a href="https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf?hsLang=en" target="_blank" rel="noopener" style="color:#f1d59a;">The Complete Guide to Building Skills for Claude (PDF)</a></p>
+      <p>原文：<a href="https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf?hsLang=en" target="_blank" rel="noopener" style="color:#f1d59a;">Claude 技能建置完整指南 (PDF)</a></p>
       <p class="muted">Source credit: Anthropic. 本站僅做繁中翻譯與編排，不主張原文內容著作權。</p>
     </section>
   </main>
