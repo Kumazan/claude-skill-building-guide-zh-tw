@@ -75,16 +75,16 @@
     <h3>📖 目錄（完整翻譯）</h3>
     <a href="#cover" onclick="toggleToc()">封面與說明</a>
     <a href="#contents" onclick="toggleToc()">目錄</a>
-    <a href="#intro" onclick="toggleToc()">Introduction</a>
-    <a href="#ch1" onclick="toggleToc()">Chapter 1 Fundamentals</a>
-    <a href="#ch2" onclick="toggleToc()">Chapter 2 Planning and design</a>
-    <a href="#ch3" onclick="toggleToc()">Chapter 3 Testing and iteration</a>
-    <a href="#ch4" onclick="toggleToc()">Chapter 4 Distribution and sharing</a>
-    <a href="#ch5" onclick="toggleToc()">Chapter 5 Patterns and troubleshooting</a>
-    <a href="#ch6" onclick="toggleToc()">Chapter 6 Resources and references</a>
+    <a href="#intro" onclick="toggleToc()">導論</a>
+    <a href="#ch1" onclick="toggleToc()">第 1 章 基礎</a>
+    <a href="#ch2" onclick="toggleToc()">第 2 章 規劃與設計</a>
+    <a href="#ch3" onclick="toggleToc()">第 3 章 測試與迭代</a>
+    <a href="#ch4" onclick="toggleToc()">第 4 章 發佈與分享</a>
+    <a href="#ch5" onclick="toggleToc()">第 5 章 模式與疑難排解</a>
+    <a href="#ch6" onclick="toggleToc()">第 6 章 資源與參考</a>
     <a href="#ref-a" onclick="toggleToc()">Reference A 快速檢查清單</a>
-    <a href="#ref-b" onclick="toggleToc()">Reference B YAML frontmatter</a>
-    <a href="#ref-c" onclick="toggleToc()">Reference C 完整範例</a>
+    <a href="#ref-b" onclick="toggleToc()">參考 B YAML frontmatter</a>
+    <a href="#ref-c" onclick="toggleToc()">參考 C 完整範例</a>
     <a href="#attribution" onclick="toggleToc()">翻譯改編與原文連結</a>
   </aside>
 
@@ -100,21 +100,21 @@
 
   <main class="container">
     <section class="section" id="contents">
-      <div class="kicker">Contents</div>
+      <div class="kicker">目錄</div>
       <h2>目錄</h2>
       <ul>
-        <li>Introduction</li>
-        <li>Fundamentals</li>
-        <li>Planning and design</li>
-        <li>Testing and iteration</li>
-        <li>Distribution and sharing</li>
-        <li>Patterns and troubleshooting</li>
-        <li>Resources and references</li>
+        <li><a href="#intro" style="color:#e8e6e3;text-decoration:none;">導論</a></li>
+        <li><a href="#ch1" style="color:#e8e6e3;text-decoration:none;">基礎</a></li>
+        <li><a href="#ch2" style="color:#e8e6e3;text-decoration:none;">規劃與設計</a></li>
+        <li><a href="#ch3" style="color:#e8e6e3;text-decoration:none;">測試與迭代</a></li>
+        <li><a href="#ch4" style="color:#e8e6e3;text-decoration:none;">發佈與分享</a></li>
+        <li><a href="#ch5" style="color:#e8e6e3;text-decoration:none;">模式與疑難排解</a></li>
+        <li><a href="#ch6" style="color:#e8e6e3;text-decoration:none;">資源與參考</a></li>
       </ul>
     </section>
 
     <section class="section" id="intro">
-      <div class="kicker">Introduction</div>
+      <div class="kicker">導論</div>
       <h2>導論</h2>
       <p><strong>Skill</strong> 是一組指令，打包成簡單資料夾，用來教 Claude 如何處理特定任務或 workflow。它是客製化 Claude 最有力的方法之一：你不必在每次對話重講偏好、流程與領域知識，只要教一次，之後每次都能受益。</p>
       <p>當你有可重複的 workflow 時，Skill 特別有力：例如從規格產生前端設計、依固定方法做研究、產出符合團隊風格的文件、或編排多步驟流程。Skill 也能和 Claude 內建能力（如程式執行與文件建立）搭配。對 MCP 整合開發者來說，Skill 會再加上一層能力：把「可呼叫工具」變成「穩定、可最佳化的 workflow」。</p>
@@ -141,7 +141,7 @@
     </section>
 
     <section class="section" id="ch1">
-      <div class="kicker">Chapter 1</div>
+      <div class="kicker">第 1 章</div>
       <h2>Fundamentals（基礎）</h2>
       <h3>什麼是 Skill？</h3>
       <p>Skill 是一個資料夾，包含：</p>
@@ -181,7 +181,7 @@
     </section>
 
     <section class="section" id="ch2">
-      <div class="kicker">Chapter 2</div>
+      <div class="kicker">第 2 章</div>
       <h2>Planning and design（規劃與設計）</h2>
       <h3>先從 use case 開始</h3>
       <p>在寫任何程式前，先定義 2–3 個具體 use case。</p>
@@ -284,7 +284,7 @@ description: What it does. Use when user asks to [specific phrases].
     </section>
 
     <section class="section" id="ch3">
-      <div class="kicker">Chapter 3</div>
+      <div class="kicker">第 3 章</div>
       <h2>Testing and iteration（測試與迭代）</h2>
       <p>Skill 可依需求採不同嚴謹度測試：</p>
       <ul>
@@ -330,7 +330,7 @@ description: What it does. Use when user asks to [specific phrases].
     </section>
 
     <section class="section" id="ch4">
-      <div class="kicker">Chapter 4</div>
+      <div class="kicker">第 4 章</div>
       <h2>Distribution and sharing（發佈與分享）</h2>
       <p>Skill 能讓 MCP 整合更完整。當使用者比較 connector 時，有 Skill 的方案通常更快產生價值，會比只有 MCP 的方案更有競爭力。</p>
 
@@ -377,7 +377,7 @@ description: What it does. Use when user asks to [specific phrases].
     </section>
 
     <section class="section" id="ch5">
-      <div class="kicker">Chapter 5</div>
+      <div class="kicker">第 5 章</div>
       <h2>Patterns and troubleshooting（模式與疑難排解）</h2>
       <p>以下模式來自早期採用者與內部團隊，屬於「常見有效做法」，不是強制模板。</p>
 
@@ -446,24 +446,24 @@ description: What it does. Use when user asks to [specific phrases].
     </section>
 
     <section class="section" id="ch6">
-      <div class="kicker">Chapter 6</div>
+      <div class="kicker">第 6 章</div>
       <h2>Resources and references（資源與參考）</h2>
       <p>若你是第一次建立 Skill，建議先看 Best Practices Guide，再依需求查 API 文件。</p>
       <h3>官方文件</h3>
       <ul>
-        <li>Best Practices Guide</li>
-        <li>Skills Documentation</li>
-        <li>API Reference</li>
-        <li>MCP Documentation</li>
+        <li><a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener" style="color:#f1d59a;">Best Practices Guide</a></li>
+        <li><a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview" target="_blank" rel="noopener" style="color:#f1d59a;">Skills Documentation</a></li>
+        <li><a href="https://docs.anthropic.com/en/api/messages" target="_blank" rel="noopener" style="color:#f1d59a;">API Reference</a></li>
+        <li><a href="https://modelcontextprotocol.io/introduction" target="_blank" rel="noopener" style="color:#f1d59a;">MCP Documentation</a></li>
       </ul>
       <h3>部落格文章</h3>
       <ul>
-        <li>Introducing Agent Skills</li>
-        <li>Engineering Blog: Equipping Agents for the Real World</li>
-        <li>Skills Explained</li>
-        <li>How to Create Skills for Claude</li>
-        <li>Building Skills for Claude Code</li>
-        <li>Improving Frontend Design through Skills</li>
+        <li><a href="https://www.anthropic.com/news/agent-skills" target="_blank" rel="noopener" style="color:#f1d59a;">Introducing Agent Skills</a></li>
+        <li><a href="https://www.anthropic.com/engineering/equipping-agents-with-tools" target="_blank" rel="noopener" style="color:#f1d59a;">Engineering Blog: Equipping Agents for the Real World</a></li>
+        <li><a href="https://www.anthropic.com/news/skills-explained" target="_blank" rel="noopener" style="color:#f1d59a;">Skills Explained</a></li>
+        <li><a href="https://www.anthropic.com/news/how-to-create-skills" target="_blank" rel="noopener" style="color:#f1d59a;">How to Create Skills for Claude</a></li>
+        <li><a href="https://www.anthropic.com/engineering/claude-code-sdk" target="_blank" rel="noopener" style="color:#f1d59a;">Building Skills for Claude Code</a></li>
+        <li><a href="https://www.anthropic.com/engineering/claude-code-best-practices#ui-development-workflow" target="_blank" rel="noopener" style="color:#f1d59a;">Improving Frontend Design through Skills</a></li>
       </ul>
       <h3>範例與工具</h3>
       <ul>
@@ -478,7 +478,7 @@ description: What it does. Use when user asks to [specific phrases].
     </section>
 
     <section class="section" id="ref-a">
-      <div class="kicker">Reference A</div>
+      <div class="kicker">參考 A</div>
       <h2>快速檢查清單（Quick checklist）</h2>
       <h3>開始前</h3>
       <ul>
@@ -515,7 +515,7 @@ description: What it does. Use when user asks to [specific phrases].
     </section>
 
     <section class="section" id="ref-b">
-      <div class="kicker">Reference B</div>
+      <div class="kicker">參考 B</div>
       <h2>YAML frontmatter 參考</h2>
       <h3>必要欄位</h3>
       <pre><code>---
@@ -544,7 +544,7 @@ metadata:
     </section>
 
     <section class="section" id="ref-c">
-      <div class="kicker">Reference C</div>
+      <div class="kicker">參考 C</div>
       <h2>完整 Skill 範例來源</h2>
       <ul>
         <li>Document Skills：PDF、DOCX、PPTX、XLSX 生成範例。</li>
@@ -555,7 +555,7 @@ metadata:
     </section>
 
     <section class="section" id="attribution">
-      <div class="kicker">Attribution</div>
+      <div class="kicker">來源聲明</div>
       <h2>翻譯改編聲明</h2>
       <div class="callout">
         本文為翻譯改編，依原始 PDF 章節順序製作為繁體中文網站版，供學習與參考使用。
