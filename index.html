@@ -1,33 +1,229 @@
-<!doctype html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Claude Skill 建置完整指南（繁中）</title>
-  <style>
-    :root{--bg:#1a2332;--panel:#243044;--text:#e8e6e3;--muted:#8a9bb5;--accent:#d4a853}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;line-height:1.8}
-    .wrap{max-width:900px;margin:0 auto;padding:24px}
-    h1,h2{color:var(--accent)}
-    .card{background:var(--panel);padding:16px 20px;border-radius:12px;margin:16px 0}
-    a{color:#ffd98c}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Claude Skills 建置完整指南（繁中）</title>
+<meta name="description" content="The Complete Guide to Building Skills for Claude 繁體中文翻譯與章節化導讀。">
+<meta property="og:title" content="Claude Skills 建置完整指南（繁中）">
+<meta property="og:description" content="Anthropic 官方 PDF 的繁中章節化網站版：從規劃、設計、測試到發布。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1a2332">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#1a2332;--bg-light:#1f2b3d;--bg-card:#243044;--fg:#e8e6e3;--muted:#8a9bb5;
+  --faint:#3a4a60;--accent:#d4a853;--accent-soft:rgba(212,168,83,.15);--ok:#2ecc71;--warn:#f39c12;
+  --serif:'Noto Serif TC',serif;--sans:'Noto Sans TC',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box} html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--fg);line-height:1.85;font-size:16px}
+.nav{position:sticky;top:0;z-index:100;background:rgba(26,35,50,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--faint);padding:0 1rem;height:52px;display:flex;align-items:center;justify-content:space-between}
+.nav-title{font-family:var(--serif);font-weight:900;font-size:1rem;color:var(--accent)} .nav-menu-btn{background:none;border:none;color:var(--fg);font-size:1.4rem}
+.nav-progress{position:absolute;left:0;bottom:0;height:2px;background:var(--accent);width:0%}
+.toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;opacity:0;pointer-events:none;transition:.25s}
+.toc-overlay.open{opacity:1;pointer-events:all}
+.toc-drawer{position:fixed;right:0;top:0;width:min(320px,85vw);height:100%;background:var(--bg-light);z-index:201;transform:translateX(100%);transition:.25s;padding:1.6rem 1.1rem;overflow-y:auto}
+.toc-drawer.open{transform:translateX(0)} .toc-drawer h3{color:var(--accent);font-size:1.1rem;font-family:var(--serif);margin-bottom:.9rem}
+.toc-drawer a{display:block;padding:.55rem 0;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--faint);font-size:.92rem}
+.container{max-width:840px;margin:0 auto;padding:0 1.2rem}
+.hero{text-align:center;padding:3.3rem 1rem 2.4rem;background:linear-gradient(180deg,var(--bg-light),var(--bg))}
+.hero h1{font-family:var(--serif);font-size:clamp(1.7rem,5vw,2.6rem);font-weight:900;color:var(--accent)}
+.hero p{color:var(--muted);margin-top:.45rem}
+.badges{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+.badge{font-family:var(--mono);font-size:.72rem;padding:.2rem .6rem;border:1px solid var(--faint);border-radius:999px;color:var(--muted)}
+.chapter{padding:2.2rem 0;opacity:0;transform:translateY(18px);transition:.45s} .chapter.visible{opacity:1;transform:translateY(0)}
+.chapter-label{font-family:var(--mono);font-size:.76rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+.chapter h2{font-family:var(--serif);font-size:1.55rem;color:#fff;margin:.2rem 0 .85rem}
+.chapter h3{font-family:var(--serif);font-size:1.15rem;color:var(--accent);margin:1.3rem 0 .6rem}
+.chapter p{margin-bottom:.85rem} .chapter ul{margin:.1rem 0 .9rem 1.2rem} .chapter li{margin-bottom:.35rem}
+.card{background:var(--bg-card);border-radius:10px;padding:1rem 1.1rem;margin:1rem 0}
+.callout{background:var(--accent-soft);border-left:4px solid var(--accent);padding:.8rem 1rem;border-radius:0 8px 8px 0;margin:1rem 0}
+.callout.warn{border-left-color:var(--warn)} .callout.ok{border-left-color:var(--ok)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.45rem;margin:1rem 0}
+.flow-step{background:var(--bg-card);border:1px solid var(--faint);border-radius:8px;padding:.5rem .75rem;font-size:.88rem;text-align:center;min-width:116px}
+.flow-arrow{color:var(--accent);font-weight:700}
+.divider{border:none;border-top:1px solid var(--faint);margin:1.4rem 0}
+.footer{text-align:center;padding:2.5rem 1rem;color:var(--muted);font-size:.83rem;border-top:1px solid var(--faint);margin-top:1rem}
+small.muted{color:var(--muted)}
+@media(max-width:600px){.flow{flex-direction:column}.flow-arrow{transform:rotate(90deg)}}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Claude Skill 建置完整指南（繁中）</h1>
-    <p>進度：骨架已建立，正在翻譯與章節化排版。</p>
-    <div class="card">
-      <h2>章節（草案）</h2>
-      <ol>
-        <li>Skill 是什麼、為何有用</li>
-        <li>何時該做成 Skill</li>
-        <li>Skill 結構與最佳實踐</li>
-        <li>測試與迭代</li>
-        <li>部署與維護</li>
-      </ol>
-    </div>
-    <p>原始 PDF：<a href="https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf?hsLang=en" target="_blank">Anthropic Resource</a></p>
+<nav class="nav">
+  <span class="nav-title">🛠 Claude Skills 指南（繁中）</span>
+  <button class="nav-menu-btn" onclick="toggleToc()" aria-label="目錄">☰</button>
+  <div class="nav-progress" id="progressBar"></div>
+</nav>
+
+<div class="toc-overlay" id="tocOverlay" onclick="toggleToc()"></div>
+<div class="toc-drawer" id="tocDrawer">
+  <h3>📖 目錄</h3>
+  <a href="#ch0" onclick="toggleToc()">導讀：什麼是 Skill</a>
+  <a href="#ch1" onclick="toggleToc()">1. Fundamentals 基礎</a>
+  <a href="#ch2" onclick="toggleToc()">2. Planning & Design 規劃設計</a>
+  <a href="#ch3" onclick="toggleToc()">3. Testing & Iteration 測試迭代</a>
+  <a href="#ch4" onclick="toggleToc()">4. Distribution & Sharing 發布分享</a>
+  <a href="#ch5" onclick="toggleToc()">5. Patterns & Troubleshooting 模式排錯</a>
+  <a href="#ch6" onclick="toggleToc()">6. Resources 參考資源</a>
+</div>
+
+<section class="hero">
+  <h1>The Complete Guide to Building Skills for Claude</h1>
+  <p>繁體中文章節化翻譯版（Web Edition）</p>
+  <div class="badges">
+    <span class="badge">來源：Anthropic PDF</span>
+    <span class="badge">更新：2026-02-16</span>
+    <span class="badge">格式：行動優先</span>
   </div>
+</section>
+
+<div class="container">
+  <section class="chapter" id="ch0">
+    <div class="chapter-label">Introduction</div>
+    <h2>Skill 是什麼？為什麼值得做？</h2>
+    <p><strong>Skill</strong> 是一組可重用指令，打包成資料夾，讓 Claude 在特定任務中更穩定、更一致。你不用每次重新講偏好、流程、產出格式，只要教一次就能反覆套用。</p>
+    <div class="callout"><strong>適合做成 Skill 的場景：</strong>可重複、可標準化、有固定品質要求的流程，例如研究摘要、文件產生、資料清洗、前端頁面生成、多步驟任務編排。</div>
+    <div class="flow">
+      <div class="flow-step">定義任務</div><div class="flow-arrow">→</div>
+      <div class="flow-step">抽出流程</div><div class="flow-arrow">→</div>
+      <div class="flow-step">寫成 Skill</div><div class="flow-arrow">→</div>
+      <div class="flow-step">反覆迭代</div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="chapter" id="ch1">
+    <div class="chapter-label">Chapter 1</div>
+    <h2>Fundamentals：Skill 的基礎結構與觀念</h2>
+    <h3>核心結構</h3>
+    <ul>
+      <li><code>SKILL.md</code>：行為規範、流程、輸出格式、品質標準。</li>
+      <li>可選輔助檔：範例輸出、模板、腳本、參考資料。</li>
+      <li>命名要語意清楚，讓模型可快速判斷何時啟用。</li>
+    </ul>
+    <h3>撰寫原則</h3>
+    <div class="card">
+      <ul>
+        <li>先定義「任務邊界」：做什麼、不做什麼。</li>
+        <li>把模糊要求轉成可驗收規格（長度、格式、欄位、語氣）。</li>
+        <li>優先寫「步驟化流程」而非抽象口號。</li>
+        <li>提供 1–2 個高品質範例，勝過大量空泛說明。</li>
+      </ul>
+    </div>
+    <div class="callout warn"><strong>常見錯誤：</strong>把 Skill 寫成長篇概念文、缺少明確輸出格式、沒有錯誤處理分支。</div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="chapter" id="ch2">
+    <div class="chapter-label">Chapter 2</div>
+    <h2>Planning & Design：從需求到可落地設計</h2>
+    <h3>設計流程（翻譯整理）</h3>
+    <ol style="margin-left:1.2rem; margin-bottom:1rem;">
+      <li>明確定義使用者目標與成功標準。</li>
+      <li>拆成輸入、處理、輸出三層。</li>
+      <li>為每一層設定可觀測的品質指標。</li>
+      <li>先出最小可用版（MVP Skill），再擴充。</li>
+    </ol>
+    <h3>MCP / 工具整合建議</h3>
+    <div class="card">
+      <ul>
+        <li>工具呼叫前先驗證前置條件（參數、權限、資源狀態）。</li>
+        <li>工具失敗要有 fallback（重試、替代路徑、人工確認）。</li>
+        <li>外部輸入（網頁、Webhook）視為不可信內容。</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="chapter" id="ch3">
+    <div class="chapter-label">Chapter 3</div>
+    <h2>Testing & Iteration：測試、迭代、品質保證</h2>
+    <h3>測試至少要覆蓋</h3>
+    <ul>
+      <li>正常流程（Happy Path）</li>
+      <li>錯誤輸入（壞格式、缺資料、衝突指令）</li>
+      <li>邊界情境（超長文本、時間限制、外部服務失敗）</li>
+    </ul>
+    <div class="card">
+      <strong>推薦節奏：</strong><br/>
+      先小範圍測試 → 收集失敗案例 → 修 SKILL.md 規則 → 再測。<br/>
+      每次迭代盡量只改一小段，方便追蹤是什麼變更造成品質提升或退步。
+    </div>
+    <div class="callout ok"><strong>實務建議：</strong>建立「測試題庫」固定回歸，每次版本更新都跑一次，避免品質漂移。</div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="chapter" id="ch4">
+    <div class="chapter-label">Chapter 4</div>
+    <h2>Distribution & Sharing：發布、版本管理與共享</h2>
+    <h3>發布前檢查清單</h3>
+    <div class="card">
+      <ul>
+        <li>描述清楚適用場景與限制。</li>
+        <li>範例可直接複製測試。</li>
+        <li>版本號與變更記錄（changelog）完整。</li>
+        <li>敏感資訊已移除（API key、私有資料、路徑）。</li>
+      </ul>
+    </div>
+    <h3>團隊共用建議</h3>
+    <ul>
+      <li>建立共用語言：輸出格式、命名規則、驗收標準統一。</li>
+      <li>每個 Skill 指定 owner，負責維護與回收問題。</li>
+      <li>避免「超大萬用 Skill」，改用小技能組合。</li>
+    </ul>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="chapter" id="ch5">
+    <div class="chapter-label">Chapter 5</div>
+    <h2>Patterns & Troubleshooting：實戰模式與排錯法</h2>
+    <h3>高成功率模式</h3>
+    <ul>
+      <li><strong>Recipe Pattern：</strong>固定配方，適合高度標準化流程。</li>
+      <li><strong>Critique-Revise Pattern：</strong>先產出初稿，再自我審查修訂。</li>
+      <li><strong>Tool-Orchestrator Pattern：</strong>先決策，再精準呼叫工具。</li>
+    </ul>
+    <h3>排錯思路</h3>
+    <div class="flow">
+      <div class="flow-step">定位失敗點</div><div class="flow-arrow">→</div>
+      <div class="flow-step">收斂最小案例</div><div class="flow-arrow">→</div>
+      <div class="flow-step">調整規則</div><div class="flow-arrow">→</div>
+      <div class="flow-step">回歸測試</div>
+    </div>
+    <div class="callout warn"><strong>記住：</strong>不要一次改太多；一次只改一件事，才知道哪個改動真的有效。</div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="chapter" id="ch6">
+    <div class="chapter-label">Chapter 6</div>
+    <h2>Resources & References：參考資源</h2>
+    <div class="card">
+      <p><strong>原始文件：</strong><br/>
+        <a href="https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf?hsLang=en" target="_blank" rel="noopener">The Complete Guide to Building Skills for Claude (PDF)</a></p>
+      <p><strong>備註：</strong>本頁為繁中翻譯與重組版，保留原文件精神與章節邏輯，並加入實作導向整理。</p>
+    </div>
+    <small class="muted">Attribution: © Anthropic（原始內容版權屬原作者/原發布方）</small>
+  </section>
+</div>
+
+<footer class="footer">
+  <p>Claude Skills 建置完整指南（繁中）</p>
+  <p>Made for Kuma · Web adaptation by 小蝦🦐</p>
+</footer>
+
+<script>
+function toggleToc(){document.getElementById('tocOverlay').classList.toggle('open');document.getElementById('tocDrawer').classList.toggle('open')}
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('.chapter').forEach(c=>io.observe(c));
+window.addEventListener('scroll',()=>{const h=document.documentElement;const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;document.getElementById('progressBar').style.width=p+'%'});
+</script>
 </body>
 </html>
